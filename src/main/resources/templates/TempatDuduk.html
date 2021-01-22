@@ -8,62 +8,31 @@
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
  <script>
-  var data = [
-  {
-    "id_tempatduduk": "TD01",
-    "lokasi":"GD722",
-    "status": "not booked"
-  },
-  {
-    "ruangan_id": "TD02",
-    "lokasi":"GD913",
-    "status": "not booked"
-  }
-  
-];
-
-var pesan = [
-  {
-    "pemesanan_id": "PSN01",
-    "tempat_duduk": "GD722",
-    "nama_user": "Sarah Christine",
-    "Tanggal Pemesanan": "2021-01-20"
-  }
-  ];
-
  $(document).ready(function(){
- /*$.getJSON(//"http://localhost:8080/users", 
-  function(result){
-  var data='';
-  for (var i = 0; i < result.length; i++) {
-
-    data += "<tr><td>" + result[i].id + "</td><td>" +
-    result[i].firstName +"</td><td>" + result[i].lastName + "</td></tr>";
-    }
-  $("#viewDataUsers").append(data);
-  });*/
-
-  var flag = '';
-   for (var i = 0; i < data.length; i++) {
-
-    flag += "<tr><td>" + data[i].id_tempatduduk + "</td><td>" + data[i].lokasi +"</td><td>" + data[i].status +"</td><td>" + 
-    "<button class=btn-primary type=button id=edit1>Edit Data</button>" + 
-    "<button class=btn-primary type=button id=delete1>Hapus Data</button>" + "</td></tr>";
-    }
-  $("#viewDataProduk").append(flag);
+  $.getJSON("http://localhost:8080/tempat-duduk",function(data){
+  	var flag = '';
+	   for (var i = 0; i < data.length; i++) {
+	
+	    flag += "<tr><td>" + data[i].tempat_duduk_id + "</td><td>" + data[i].lokasi +"</td><td>" + data[i].status +"</td><td>" + 
+	    "<button class=btn-primary type=button id=edit1>Edit Data</button>" + 
+	    "<button class=btn-primary type=button id=delete1>Hapus Data</button>" + "</td></tr>";
+	    }
+	  $("#viewDataTempatDuduk").append(flag);
+	 });
  });
-
  $(document).ready(function(){
-  var isi = '';
-   for (var i = 0; i < pesan.length; i++) {
-
-    isi += "<tr><td>" + pesan[i].pemesanan_id + "</td><td>" +
-    pesan[i].tempat_duduk +"</td><td>" + pesan[i].nama_user +"</td><td>" + pesan[i].Tanggal + "</td><td>" + 
-    "<button class=btn-primary type=button id=edit2>Edit Data</button>" + 
-    "<button class=btn-primary type=button id=delete1>Hapus Data</button>" + "</td></tr>";
-    }
-  $("#viewDataBayar").append(isi);
-});
+	$.getJSON("http://localhost:8080/pemesanan-tempat-duduk",function(pesan){
+		var isi = '';
+	   	for (var i = 0; i < pesan.length; i++) {
+	
+	    isi += "<tr><td>" + pesan[i].pemesanan_id + "</td><td>" +
+	    pesan[i].tempat_duduk_id +"</td><td>" + pesan[i].user_id +"</td><td>" + pesan[i].tanggal_pemesanan + "</td><td>" + 
+	    "<button class=btn-primary type=button id=edit2>Edit Data</button>" + 
+	    "<button class=btn-primary type=button id=delete1>Hapus Data</button>" + "</td></tr>";
+	    }
+	  	$("#viewDataPemesanan").append(isi);
+	});
+ });
 
 $(document).on('click','.table #edit1',function(){
       window.location.href="Edit_DataTempatDuduk.html"
@@ -174,7 +143,7 @@ footer {
   <div class="content1">
   <h4>Data Tempat Duduk</h4>
   <br>
-  <table id="viewDataProduk" class="table table-success table-bordered">
+  <table id="viewDataTempatDuduk" class="table table-success table-bordered">
     <tr>
     <th>Tempat Duduk ID</th>
     <th>Lokasi</th>
@@ -188,7 +157,7 @@ footer {
 <div class="content2">
   <h4>Pemesanan Tempat Duduk</h4>
   <br>
-  <table id="viewDataBayar" class="table table-success table-bordered">
+  <table id="viewDataPemesanan" class="table table-success table-bordered">
     <tr>
     <th>Pemesanan ID</th>
     <th>Lokasi Tempat Duduk</th>
