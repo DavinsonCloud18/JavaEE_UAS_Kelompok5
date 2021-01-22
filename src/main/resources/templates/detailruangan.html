@@ -7,7 +7,41 @@
  </script>
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+ <script>
+  /*var data = [
+  {
+    "ruangan_id": "R01",
+    "nama_ruangan": "Lab 723",
+    "lokasi":"GD7",
+    "status": "not booked"
+  },
+  {
+    "ruangan_id": "R01",
+    "nama_ruangan": "Lab 714",
+    "lokasi":"GD7",
+    "status": "not booked"
+  }
+  
+]; */
 
+ $(document).ready(function(){
+ $.getJSON("http://localhost:8080/pemesanan_ruangan", function(pesan){ 
+   var isi = '';
+   for (var i = 0; i < pesan.length; i++) {
+
+   isi += "<tr><td>" + pesan[i].pemesanan_id + "</td><td>" +
+    pesan[i].user_id +"</td><td>" + pesan[i].ruangan_id +"</td><td>" + pesan[i].tanggal_pemesanan +"</td><td>" + 
+    "<button class=btn-primary type=button id=ruanganhis>Konfirmasi</button>" +"</td></tr>";
+    }
+  $("#viewDataPemesananRuangan").append(isi);
+});
+ });
+
+$(document).on('click','.table #ruanganhis',function(){
+      window.location.href="historyruangan.html"
+  })
+
+ </script>
  </head>
 
  <style>
@@ -82,7 +116,7 @@ footer {
 
   .content {
   background-color: #aaaaaa;
-  margin-left : 2cm;
+  margin-left:  2cm;
 
 }
 
@@ -93,48 +127,32 @@ footer {
 
 <div id="page-container">
   <div class="header">
-  <a href="user_fix.html" class="logo">KantinKoperasi</a>
+  <a href="kantinku.html" class="logo">KantinKoperasi</a>
   <div class="header-right">
-    <a href="user_fix.html">User</a>
-    <a href="kantin.html">Kantin</a>
-    <a class="active" href="koperasi.html">Koperasi</a>
-    <a href="pulsa.html">Pulsa</a>
-    <a href="ruangan.html">Ruangan</a>
-    <a href="tempatduduk.html">Tempat Duduk</a>
-    <a href="paket.html">Paket</a>
+    <a href="kantinku.html">Kantin</a>
+    <a href="koperasiku.html">Koperasi</a>
+    <a href="pulsaku.html">Pulsa</a>
+    <a class="active" href="ruanganku.html">Ruangan</a>
+    <a href="tempatdudukku.html">Tempat Duduk</a>
+    <a href="paketku.html">Paket</a>
     <a href="#Logout">Logout</a>
   </div>
 </div>
 
-<div class="content1">
-<form  th:action="@{/tambah-produk-koperasi}" th:object="${produk}" method="post">
-  <h4>Tambah Data Produk Koperasi</h4>
- 	<br>
- 	<table id="viewDataProduk" class="table table-success table-bordered" >
- 	<tr>
- 		<td>Produk ID</td>
-    <td><input type="text" th:field="*{produk_id}"></td>
-  </tr>
-  <tr>
- 		<td>Nama Produk</td>
-    <td><input type="text" th:field="*{nama_produk}"></td>
-  </tr>
-  <tr>
- 		<td>Jenis Produk</td>
-    <td><input type="text" th:field="*{jenis_produk}"></td>
-  </tr>
-  <tr>
- 		<td>Owner</td>
-    <td><input type="text" th:field="*{owners}"></td>
-  </tr>
-  <tr>
- 		<td>Harga</td>
-    <td><input type="text" th:field="*{harga}"></td>
-  </tr>
- 	</table>
- 	<button id=btn3><a href="Koperasi.html">Tambah data</a></button>
+<div class="content2">
+  <h4>Detail Ruangan<h4>
+  <br>
+  <table id="viewDataPemesananRuangan" class="table table-success table-bordered">
+    <tr>
+    <th>Pemesanan ID</th>
+    <th>User ID</th>
+    <th>Ruangan ID</th>
+    <th>Tanggal Pemesanan</th>
+    <th>Aksi</th>
+    </tr>
+  </table>
 </div>
-</form>
+
 <footer>
   <p>Kelompok 5 Mata Kuliah Java EE<br>
   <a>D3 Teknologi Informasi 2018</a></p>

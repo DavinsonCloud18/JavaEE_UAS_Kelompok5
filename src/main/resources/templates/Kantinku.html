@@ -2,12 +2,33 @@
 <html>
  <head>
  <meta charset = "ISO-8859-1"/>
- <title>View Users</title>
+ <title>Bisnis Koperasi dan Kantin</title>
  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
  </script>
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+ <script>
 
+ $(document).ready(function(){
+ $.getJSON("http://localhost:8080/produk", 
+  function(data){
+   var flag = '';
+   for (var i = 0; i < data.length; i++) {
+
+    flag += "<tr><td>"  +
+    data[i].nama_produk +"</td><td>" + data[i].jenis_produk +"</td><td>" + data[i].owners +"</td><td>" + data[i].harga +"</td><td>"+"<button class=btn-primary type=button id=history1>Pesan</button>" +"</td><tr>" ;
+    }
+  $("#viewDataProduk").append(flag);
+ });
+
+
+ 
+$(document).on('click','.table #history1',function(){
+      window.location.href="detailkantin.html"
+  })
+ });
+
+ </script>
  </head>
 
  <style>
@@ -55,6 +76,7 @@ footer {
   font-weight: bold;
 }
 
+
 .header a:hover {
   background-color: #ddd;
   color: black;
@@ -82,7 +104,7 @@ footer {
 
   .content {
   background-color: #aaaaaa;
-  margin-left : 2cm;
+  margin-left: 2cm;
 
 }
 
@@ -92,49 +114,43 @@ footer {
 <body>
 
 <div id="page-container">
-  <div class="header">
-  <a href="user_fix.html" class="logo">KantinKoperasi</a>
+
+<div class="header">
+  <a href="kantinku.html" class="logo">KantinKoperasi</a>     
   <div class="header-right">
-    <a href="user_fix.html">User</a>
-    <a href="kantin.html">Kantin</a>
-    <a class="active" href="koperasi.html">Koperasi</a>
-    <a href="pulsa.html">Pulsa</a>
-    <a href="ruangan.html">Ruangan</a>
-    <a href="tempatduduk.html">Tempat Duduk</a>
-    <a href="paket.html">Paket</a>
+
+    <a class="active" href="kantinku.html">Kantin</a>
+    <a href="koperasiku.html">Koperasi</a>
+    <a href="pulsaku.html">Pulsa</a>
+    <a href="ruanganku.html">Ruangan</a>
+    <a href="tempatdudukku.html">Tempat Duduk</a>
+    <a href="paketku.html">Paket</a>
     <a href="#Logout">Logout</a>
   </div>
 </div>
 
 <div class="content1">
-<form  th:action="@{/tambah-produk-koperasi}" th:object="${produk}" method="post">
-  <h4>Tambah Data Produk Koperasi</h4>
- 	<br>
- 	<table id="viewDataProduk" class="table table-success table-bordered" >
- 	<tr>
- 		<td>Produk ID</td>
-    <td><input type="text" th:field="*{produk_id}"></td>
-  </tr>
-  <tr>
- 		<td>Nama Produk</td>
-    <td><input type="text" th:field="*{nama_produk}"></td>
-  </tr>
-  <tr>
- 		<td>Jenis Produk</td>
-    <td><input type="text" th:field="*{jenis_produk}"></td>
-  </tr>
-  <tr>
- 		<td>Owner</td>
-    <td><input type="text" th:field="*{owners}"></td>
-  </tr>
-  <tr>
- 		<td>Harga</td>
-    <td><input type="text" th:field="*{harga}"></td>
-  </tr>
- 	</table>
- 	<button id=btn3><a href="Koperasi.html">Tambah data</a></button>
+  <h4>Data Produk Kantin</h4>
+  <b>Saldo : Rp.50.000</b>
+  <br>
+  <table id="viewDataProduk" class="table table-success table-bordered">
+    <tr>
+   
+    <th>Nama Produk</th>
+    <th>Jenis Produk</th>
+    <th>Owner</th>
+    <th>Harga</th>
+    <th>Aksi
+    </th>
+
+    </tr>
+
+  </table>
+  
 </div>
-</form>
+
+
+
 <footer>
   <p>Kelompok 5 Mata Kuliah Java EE<br>
   <a>D3 Teknologi Informasi 2018</a></p>
@@ -143,4 +159,3 @@ footer {
 
  </body>
 </html>
- 
