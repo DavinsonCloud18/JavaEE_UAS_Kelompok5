@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset = "ISO-8859-1"/>
+ <title>View Users</title>
+ <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+ </script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ <script>
+ 	var data = [
+  {
+    "produk_id": "KP01",
+    "nama_produk": "Buku",
+    "jenis_produk": "Barang",
+    "owner": "Koperasi",
+    "Harga": "3000"
+  },
+  {
+    "produk_id": "KP02",
+    "nama_produk": "Bakwan",
+    "jenis_produk": "Snack",
+    "owner": "Koperasi",
+    "Harga": "1000"
+  }
+  
+];
+
+
+ $(document).ready(function(){
+ /*$.getJSON(//"http://localhost:8080/users", 
+	function(result){
+ 	var data='';
+ 	for (var i = 0; i < result.length; i++) {
+
+ 		data += "<tr><td>" + result[i].id + "</td><td>" +
+ 		result[i].firstName +"</td><td>" + result[i].lastName + "</td></tr>";
+ 		}
+ 	$("#viewDataUsers").append(data);
+ 	});*/
+
+ 	 var flag = '';
+ 	 for (var i = 0; i < data.length; i++) {
+
+ 		flag += "<tr><td>" + data[i].produk_id + "</td><td>" +
+ 		data[i].nama_produk +"</td><td>" + data[i].jenis_produk +"</td><td>" + data[i].owner +"</td><td>" + data[i].Harga +"</td><td>"+"<button class=btn-primary type=button id=kop1>Pesan</button>"+ "</td></tr>";
+ 		}
+ 	$("#viewDataProduk").append(flag);
+ });
+
+ 
+$(document).on('click','.table #kop1',function(){
+      window.location.href="detailkoperasi.html"
+  })
+
+ </script>
+ </head>
+
+ <style>
+* {box-sizing: border-box;}
+
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+  text-align: center;
+  background-color: #43C6AC;
+  color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1.5cm;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #43C6AC;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+
+  .content {
+  background-color: #aaaaaa;
+  margin-left: : 2cm;
+
+}
+
+}
+</style>
+</head>
+<body>
+
+<div id="page-container">
+  <div class="header">
+  <a href="kantinku.html" class="logo">KantinKoperasi</a>
+  <div class="header-right">
+    <a href="kantinku.html">Kantin</a>
+    <a class="active" href="koperasiku.html">Koperasi</a>
+    <a href="pulsaku.html">Pulsa</a>
+    <a href="ruanganku.html">Ruangan</a>
+    <a href="tempatdudukku.html">Tempat Duduk</a>
+    <a href="paketku.html">Paket</a>
+    <a href="#Logout">Logout</a>
+  </div>
+</div>
+
+<div class="content1">
+  <h4>Data Produk Koperasi</h4>
+  <b>Saldo : Rp.50.000</b>
+ 	<br>
+ 	<table id="viewDataProduk" class="table table-success table-bordered">
+ 		<tr>
+ 		<th>Produk ID</th>
+ 		<th>Nama Produk</th>
+ 		<th>Jenis Produk</th>
+ 		<th>Owner</th>
+ 		<th>Harga</th>
+    <th>Aksi</th>
+ 		</tr>
+ 	</table>
+</div>
+
+
+
+<footer>
+  <p>Kelompok 5 Mata Kuliah Java EE<br>
+  <a>D3 Teknologi Informasi 2018</a></p>
+</footer>
+</div>
+
+ </body>
+</html>
+ 
